@@ -1,0 +1,152 @@
+/* Estilos para el header */
+header {
+    background-color: #ffffff; /* Color de fondo del header */
+    color: #000000; /* Color del texto */
+    padding: 10px 20px; /* Aumenta el espaciado interno del header para dar espacio al logo */
+    display: flex; /* Utiliza flexbox para alinear elementos horizontalmente */
+    justify-content: space-between; /* Alinea elementos a los extremos (izquierda y derecha) */
+    align-items: center; /* Centra verticalmente los elementos */
+    transition: background-color 1s;
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+}
+
+header:hover {
+    background-color: #e3e3e3;
+    color: black;
+    transition: background-color 1s;
+}
+.logoã{
+    width: 150px;
+   
+    position: relative;
+    
+    
+}
+.divContainer{
+    width: 300px;
+
+    height: 90px;
+    position: relative;
+   
+}
+
+/* Estilos para el menú principal */
+.menu {
+    font-size: 17px;
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Los elementos del menú se envuelven en pantallas pequeñas */
+    justify-content: flex-end; /* Alinea los elementos al extremo derecho */
+   top: 0px;
+    position: relative;
+    left: 0%;
+    z-index: 2000;
+    width: 460px;
+   
+    }
+
+.menu li {
+    margin-right: 20px; /* Espaciado entre los botones */
+}
+
+/* Estilos para los botones Home a Contact */
+.menu a {
+    color: #000000;
+    text-decoration: none;
+    padding: 5px 8px; /* Reduce el padding para hacer los botones más pequeños */
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.menu a:hover {
+    border-color: #00ced1; /* Cambia el borde al pasar el cursor */
+}
+
+/* Estilos para los botones Log In y Sign Up en el menú principal */
+
+
+
+/* Estilos para el botón de menú en pantallas pequeñas */
+.menu-button {
+    display: none; /* Oculta el botón por defecto */
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para el ícono del botón de menú */
+.menu-icon {
+    width: 0px;
+    height: 0px;
+    background-color: #fff;
+    display: block;
+    margin: 3px auto;
+    transition: background-color 0.3s ease;
+    position: relative;
+    top: -10px;
+}
+
+/* Estilos para el ícono del botón de menú cuando está abierto */
+.menu-button.open .menu-icon {
+    background-color: transparent;
+}
+
+/* Estilos para la imagen del logo */
+.logo {
+    max-width: 170px; /* Ajusta el ancho máximo según tus necesidades */
+   
+    margin: 0px; /* Espaciado entre la imagen y los botones del menú */
+    transition: opacity 0.3s ease; /* Transición de opacidad */
+   
+
+}
+.divContainer{
+    position: relative;
+    top: 25px;
+}
+/* Resto de tus estilos existentes... */
+
+/* Media query para mostrar el menú desplegable cuando la pantalla es menor a 940px */
+@media (max-width: 940px) {
+    header {
+     /* Color de fondo del header */
+        color: #fff; /* Color del texto */
+        padding: 10px 20px; /* Aumenta el espaciado interno del header para dar espacio al logo */
+        display: flex; /* Utiliza flexbox para alinear elementos horizontalmente */
+        justify-content: space-between; /* Alinea elementos a los extremos (izquierda y derecha) */
+        align-items: center; /* Centra verticalmente los elementos */
+        transition: background-color 1s;
+        height: auto;
+    }
+    .menu {
+        display: none; /* Oculta el menú principal */
+        flex-direction: column; /* Los elementos se apilan uno encima del otro */
+        align-items: center; /* Centra los elementos verticalmente */
+        position: relative; left: 50%;
+    }
+    .menu li {
+        padding: 10px; /* Espaciado entre los botones */
+    }
+
+    .menu-button {
+        display: block; /* Muestra el botón para abrir el menú desplegable */
+    }
+
+    .menu.open {
+        display: flex; /* Muestra el menú desplegable cuando está abierto */
+    }
+    .logo {
+        display: none; /* Oculta la imagen del logo */
+    }
+ 
+}
+
+

@@ -1,24 +1,22 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Calendario from './components/calendario';
+// Asegúrate de que la ruta sea correcta y que el nombre del archivo sea correcto
+import { CitasProvider } from './context/citasContext';
+
+// Importa o define citasProgramadas aquí
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CitasProvider>
+      <div  className="App" style={{ overflow: 'auto' }}>
+        
+        <Calendario />
+
+      </div>
+    </CitasProvider>
   );
 }
 

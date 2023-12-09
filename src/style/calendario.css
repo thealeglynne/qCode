@@ -6,11 +6,12 @@
 }
 /* Estilos generales */
 .CalendarioCont {
-  overflow: scroll;
-  height: 200vh;
+  overflow: auto;
+  height: 100vh;
   background-color: #fafafa;
   top: 50px;
   position: relative;
+  max-height: 100vh;
  }
 .imgCalendarioCont{
   height: 100vh;
@@ -192,7 +193,9 @@ background: linear-gradient(to bottom, #ffffff, #959595);
 
 
 
-
+.componentsSec2{
+  background-color: transparent;
+}
 
  form {
   display: flex;
@@ -326,3 +329,26 @@ padding: 10px;
   top: 200px;
 }
 
+/* CitasMenu.css */
+
+.citas-menu {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+}
+
+.CitaItem {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+button {
+  margin-left: 5px;
+}
+.FooterContainer{
+  position: relative;
+  top: -110px;
+  z-index: 10000;
+}

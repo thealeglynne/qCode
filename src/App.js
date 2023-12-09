@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Footer from './components/footer';
 import Calendario from './components/calendario';
 // Asegúrate de que la ruta sea correcta y que el nombre del archivo sea correcto
 import { CitasProvider } from './context/citasContext';
@@ -14,7 +15,7 @@ function App() {
       <div  className="App" style={{ overflow: 'auto' }}>
         
         <Calendario />
-
+        <Footer />
       </div>
     </CitasProvider>
   );

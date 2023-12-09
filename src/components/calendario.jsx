@@ -5,36 +5,50 @@ import { useCitasContext, CitasProvider } from '../context/citasContext';
 import LoginForm from './login';
 import Header from './header';
 import Gif2 from "../img/Ding.gif"
+import CitasMenu from '../components/citasMenu'
+import Footer from './footer';
+
 
 const Calendario = () => {
     const { espaciosDisponibles, actualizarEspaciosDisponibles } = useCitasContext();
 
   // Información de ejemplo directamente en el código
-  const citasEjemplo = [
-    { dia: 'lunes', horaInicio: '09:15', duracion: 60 },
-    { dia: 'lunes', horaInicio: '10:30', duracion: 45 },
-    { dia: 'lunes', horaInicio: '12:00', duracion: 90 },
-    { dia: 'lunes', horaInicio: '16:15', duracion: 30 },
-    { dia: 'martes', horaInicio: '09:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '10:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '11:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '12:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '13:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '14:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '15:00', duracion: 45 },
-    { dia: 'martes', horaInicio: '16:00', duracion: 45 },
-    { dia: 'miércoles', horaInicio: '10:30', duracion: 60 },
-    { dia: 'miércoles', horaInicio: '12:00', duracion: 45 },
-    { dia: 'miércoles', horaInicio: '14:00', duracion: 60 },
-    { dia: 'jueves', horaInicio: '09:00', duracion: 45 },
-    { dia: 'jueves', horaInicio: '10:30', duracion: 90 },
-    { dia: 'jueves', horaInicio: '12:00', duracion: 30 },
-    { dia: 'jueves', horaInicio: '14:00', duracion: 60 },
-    { dia: 'viernes', horaInicio: '09:00', duracion: 60 },
-    { dia: 'viernes', horaInicio: '10:30', duracion: 30 },
-    { dia: 'viernes', horaInicio: '12:00', duracion: 60 },
-    { dia: 'viernes', horaInicio: '14:00', duracion: 45 },
-  ];
+  const citasEjemplo = {
+    lunes: [
+      { horaInicio: '09:15', duracion: 60 },
+      { horaInicio: '10:30', duracion: 45 },
+      { horaInicio: '12:00', duracion: 90 },
+      { horaInicio: '16:15', duracion: 30 },
+    ],
+    martes: [
+      { horaInicio: '09:00', duracion: 45 },
+      { horaInicio: '10:00', duracion: 45 },
+      { horaInicio: '11:00', duracion: 45 },
+      { horaInicio: '12:00', duracion: 45 },
+      { horaInicio: '13:00', duracion: 45 },
+      { horaInicio: '14:00', duracion: 45 },
+      { horaInicio: '15:00', duracion: 45 },
+      { horaInicio: '16:00', duracion: 45 },
+    ],
+    miércoles: [
+      { horaInicio: '10:30', duracion: 60 },
+      { horaInicio: '12:00', duracion: 45 },
+      { horaInicio: '14:00', duracion: 60 },
+    ],
+    jueves: [
+      { horaInicio: '09:00', duracion: 45 },
+      { horaInicio: '10:30', duracion: 90 },
+      { horaInicio: '12:00', duracion: 30 },
+      { horaInicio: '14:00', duracion: 60 },
+    ],
+    viernes: [
+      { horaInicio: '09:00', duracion: 60 },
+      { horaInicio: '10:30', duracion: 30 },
+      { horaInicio: '12:00', duracion: 60 },
+      { horaInicio: '14:00', duracion: 45 },
+    ],
+  };
+  
 
 
   const [diaSeleccionado, setDiaSeleccionado] = useState('');
@@ -47,8 +61,11 @@ const Calendario = () => {
   const [citaConfirmada, setCitaConfirmada] = useState(null);
 
   useEffect(() => {
-    // Actualiza la interfaz cuando la lista de citas cambia
-    // Esto permite visualizar todas las citas programadas en orden
+    const storedCitas = JSON.parse(localStorage.getItem('citasProgramadas')) || [];
+    setCitasProgramadas(storedCitas);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('citasProgramadas', JSON.stringify(citasProgramadas));
   }, [citasProgramadas]);
 
   const programarCita = (cita) => {
@@ -78,8 +95,9 @@ const Calendario = () => {
   };
 
   const filtrarCitasPorDia = () => {
-    return citasEjemplo.filter((cita) => cita.dia === diaSeleccionado);
+    return diaSeleccionado ? citasEjemplo[diaSeleccionado] || [] : [];
   };
+  
 
   const calcularEspaciosDisponibles = () => {
     // Obtén las citas filtradas
@@ -94,15 +112,16 @@ const Calendario = () => {
   
 
   const obtenerHorasDisponibles = () => {
-    // Obtén las horas disponibles de las citas de ejemplo
-    const horasDisponibles = citasEjemplo.map((cita) => cita.horaInicio);
-    return horasDisponibles;
+    return diaSeleccionado ? citasEjemplo[diaSeleccionado].map(cita => cita.horaInicio) : [];
   };
+  
+  
   const esHoraDisponible = (hora) => {
-    // Verifica si la hora seleccionada está en la lista de horas disponibles
-    const horaDisponible = citasEjemplo.some((cita) => cita.horaInicio === hora);
-    return horaDisponible;
+    // Verifica si la hora seleccionada está en el array de horas disponibles del día seleccionado
+    const horasDisponibles = citasEjemplo[diaSeleccionado] || [];
+    return horasDisponibles.some((cita) => cita.horaInicio === hora);
   };
+  
   
   const sumarMinutos = (hora, minutos) => {
     const [horaStr, minutosStr] = hora.split(':');
@@ -235,17 +254,16 @@ Estamos aquí para ayudarte. ¡Esperamos verte pronto!</p>
               </label>
               <br />
               <label>
-                Hora:
-                <select value={horaSeleccionada} onChange={(e) => setHoraSeleccionada(e.target.value)} required>
-                  <option value="">Seleccionar hora</option>
-                  {/* Aquí puedes mostrar las horas disponibles del día seleccionado */}
-                  {obtenerHorasDisponibles().map((hora) => (
-                    <option key={hora} value={hora}>
-                      {hora}
-                    </option>
-                  ))}
-                </select>
-              </label>
+    Hora:
+    <select value={horaSeleccionada} onChange={(e) => setHoraSeleccionada(e.target.value)} required>
+  <option value="">Seleccionar hora</option>
+  {obtenerHorasDisponibles().map((hora) => (
+    <option key={hora} value={hora}>
+      {hora}
+    </option>
+  ))}
+</select>
+  </label>
               <br />
   <button type="submit">Programar Cita</button>
  
@@ -258,31 +276,23 @@ Estamos aquí para ayudarte. ¡Esperamos verte pronto!</p>
         )}
         
          </div>
-         <div id="" className='CitasContainer ' >
-     {citasProgramadas.length > 0 && (
-  <div>
-    <h3>Citas Programadas</h3>
-    {citasProgramadas.map((cita, index) => (
-      <div key={index} className="CitaItem">
-        <p>Día: {cita.dia}</p>
-        <p>Hora: {cita.hora}</p>
-        <p>Nombre: {cita.nombre}</p>
-        <p>Apellido: {cita.apellido}</p>
-        <button onClick={() => handleConfirmarCita(index)}>Confirmar</button>
-        <button onClick={() => handleBorrarCita(index)}>Borrar</button>
+         <div className='CitasContainer'>
+        <CitasMenu
+          citasProgramadas={citasProgramadas}
+          handleConfirmarCita={handleConfirmarCita}
+          handleBorrarCita={handleBorrarCita}
+        />
       </div>
-    ))}
-  </div>
-)}
-
-     </div>
       </div>
   
       </div>
    
-  
-    
+
+    <div className='FooterContainer'>
+   
+    </div>
       </div>
+      
   );
 };
 

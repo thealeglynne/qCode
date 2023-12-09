@@ -1,0 +1,36 @@
+/* citasMenu.css */
+
+.citas-menu {
+border: none;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 10px;
+backdrop-filter: blur(10px);
+width: 80%;
+position: relative;
+left: 7%;
+top: -10px;
+z-index: 100;
+  }
+  
+  .citas-menu.desplegado {
+    display: block;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .toggle-button {
+    cursor: pointer;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding:  10px;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 13px;
+    top: 5px;
+    border-radius: 10px;
+  }
+  
